@@ -1,4 +1,5 @@
 import speech_recognition as sr
+import translators as ts
 
 # Initialize the recognizer
 recognizer = sr.Recognizer()
@@ -11,13 +12,9 @@ with sr.Microphone() as source:
 # Recognize the spoken text
 try:
     text = recognizer.recognize_google(audio)
-    print(f"You said:{text}")
-
-    # Add logic to execute commands based on recognized text
-
-    if "hello" in text:
-        # Execute a command to open a web browser
-        print("I heard hello!")
+    print(f"You said: {text}")
+    translatedtext = ts.translate_text(text, translator = 'google', from_language = 'auto', to_language = 'fr')
+    print(f"Translation: {translatedtext}")
 
 except sr.UnknownValueError:
     print("Sorry, I could not understand your audio.")
